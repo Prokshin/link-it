@@ -7,7 +7,7 @@ export const actions = {
 		const res = await createLinkHandler(event);
 
 		if (res.error) {
-			if (res.error.exceptionType === 'Not Found') {
+			if (res.error.exceptionType === 'Not Found' && res.error.message) {
 				redirect(301, `/link/${res.error.message}`);
 			}
 			return fail(400, res.error);

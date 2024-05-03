@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import InputField from '$lib/shared/kit/ui/InputField.svelte';
 	import { fly, slide } from 'svelte/transition';
 
 	let loading = false;
@@ -28,18 +29,7 @@
 			};
 		}}
 	>
-		<div class="form-control">
-			<label class="label" for="password">
-				<span class="label-text">Пароль</span>
-			</label>
-			<input
-				type="password"
-				class="input input-bordered"
-				name="password"
-				id="password"
-				disabled={loading}
-			/>
-		</div>
+		<InputField name="password" type="password" label="Пароль" disabled={loading} />
 		<div class="form-control mt-6">
 			<button class="btn btn-primary" disabled={loading}>
 				{#if loading}

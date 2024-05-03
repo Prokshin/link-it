@@ -3,7 +3,7 @@ import md5 from 'crypto-js/md5';
 import { linkSchema, type Link } from '$lib/entities/link';
 import type { RequestEvent } from '../../../../routes/create-link/$types';
 import { createLinkFormSchema } from '../model/form';
-import { createLink } from '$lib/entities/link/api/linkApiService';
+import { apiLinkService } from '$lib/entities/link';
 import type { IHandlerMessage } from '$lib/shared/handlerMessage';
 
 export const createLinkHandler = async (event: RequestEvent): Promise<IHandlerMessage<Link>> => {
@@ -25,12 +25,14 @@ export const createLinkHandler = async (event: RequestEvent): Promise<IHandlerMe
 
 	const url = md5(data.url + Date.now() + data.title).toString();
 	const password = await bcrypt.hash(data.password, 10);
-	const rawLink = await createLink({ ...data, hashedUrl: url, password });
+	const rawLink = await apiLinkService.createLink({ ...data, hashedUrl: url, password });
 
 	const { data: link } = linkSchema.safeParse(rawLink);
 
 	if (!link) {
-		return { status: 'fail', error: { exceptionType: 'Not Found', message: url } };
+		return url
+			? { status: 'fail', error: { exceptionType: 'Not Found', message: url } }
+			: { status: 'fail', error: { exceptionType: 'Unexpected Error', message: '' } };
 	}
 
 	return { status: 'success', data: link };

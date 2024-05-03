@@ -1,11 +1,11 @@
 import bcrypt from 'bcrypt';
-import { getHashedPassword, getLink } from '$lib/entities/link/api/linkApiService';
+import { apiLinkService } from '$lib/entities/link';
 import { linkSchema, type Link } from '$lib/entities/link';
 import type { RequestEvent } from '../../../../routes/link/[slug]/$types';
 import type { IHandlerMessage } from '$lib/shared/handlerMessage';
 
 const checkValidPassword = async (hashedUrl: string, password: string) => {
-	const hashedPassword = await getHashedPassword(hashedUrl);
+	const hashedPassword = await apiLinkService.getHashedPassword(hashedUrl);
 	return bcrypt.compare(password as string, hashedPassword);
 };
 
@@ -25,7 +25,7 @@ export const getLinkInfoHandler = async (event: RequestEvent): Promise<IHandlerM
 			};
 		}
 
-		const linkRaw = await getLink(slug);
+		const linkRaw = await apiLinkService.getLink(slug);
 
 		const { data: link, error } = linkSchema.safeParse(linkRaw);
 
