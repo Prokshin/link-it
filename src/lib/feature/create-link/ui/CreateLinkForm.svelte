@@ -10,6 +10,7 @@
 			</label>
 			<input
 				name="title"
+				id="title"
 				type="text"
 				placeholder="Тайная ссылка"
 				class="input input-bordered"
@@ -23,6 +24,7 @@
 			<input
 				type="url"
 				name="url"
+				id="url"
 				placeholder="https://svelte.dev"
 				class="input input-bordered"
 				required
@@ -32,7 +34,7 @@
 			<label class="label" for="description">
 				<span class="label-text">Описание ссылки</span>
 			</label>
-			<textarea class="textarea textarea-bordered" name="description" />
+			<textarea class="textarea textarea-bordered" name="description" id="description" />
 		</div>
 		<div class="form-control">
 			<label class="label" for="password">
