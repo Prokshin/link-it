@@ -38,7 +38,7 @@
 			<label class="label" for="password">
 				<span class="label-text">Секретный пароль</span>
 			</label>
-			<input type="password" class="textarea textarea-bordered" name="password" />
+			<input type="password" id="password" class="input input-bordered" name="password" />
 		</div>
 		<div class="form-control mt-6">
 			<button class="btn btn-primary">Создать ссылку</button>

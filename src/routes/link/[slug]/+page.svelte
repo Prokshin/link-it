@@ -6,6 +6,9 @@
 	export let form: ActionData;
 </script>
 
+<svelte:head>
+	<title>Просмотр защищённой ссылки</title>
+</svelte:head>
 {#if form?.isSuccess}
 	<div class="flex justify-center mt-5">
 		<LinkDetail data={form.data} />
